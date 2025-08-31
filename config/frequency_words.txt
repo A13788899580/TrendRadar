@@ -1,65 +1,54 @@
-胖东来
-于东来
+VR
+MR
+vr
+mr
+AR
+ar
+
+3D
+3DVR相机
+3DVR camera
+3DVRcamera
+3D相机
+3D camera
+3Dcamera
+VRcamera
+VR camera
+180° 3Dcamera
+180°3DVR 
+180°3DVR video
+180° 3DVR video
+1803DVR 
+180 3DVR video
+180度 3DVR video
+360°VR
+360°VR video
+360°VR camera
+空间视频
+Spatial video
+SpatialVideo
 
 DeepSeek
-梁文锋
 
 华为
 鸿蒙
 HarmonyOS
-任正非
-
-比亚迪
-王传福
 
 大疆
 DJI
 
-宇树
-王兴兴
-
-智元
-灵犀
-稚晖君
-彭志辉
-
-黑神话
-冯骥
-
-影之刃零
-梁其伟
-
-哪吒
-饺子
-杨宇
-!车
-!餐
-
-三体
-流浪地球
-刘慈欣
-郭帆
-
-申奥
-
-京东
-刘强东
-
 字节
 bytedance
-张一鸣
 
-特斯拉
-马斯克
+insta360
+影石
 
 微软
 Microsoft
 
-英伟达
-NVIDIA
-黄仁勋
+看到
+kandao
 
-AMD
 
 谷歌
 google
@@ -89,25 +78,6 @@ ai
 国产
 中国
 
-美国
-日本
-韩国
-
-芯片
-光刻机
-
 科技
 
-核能
 
-水电站
-雅鲁藏布江
-
-新质生产力
-
-月球
-登月
-火星
-宇宙
-飞船
-航空
