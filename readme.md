@@ -7,7 +7,7 @@
 [![GitHub Stars](https://img.shields.io/github/stars/sansan0/TrendRadar?style=flat-square&logo=github&color=yellow)](https://github.com/sansan0/TrendRadar/stargazers)
 [![GitHub Forks](https://img.shields.io/github/forks/sansan0/TrendRadar?style=flat-square&logo=github&color=blue)](https://github.com/sansan0/TrendRadar/network/members)
 [![License](https://img.shields.io/badge/license-GPL--3.0-blue.svg?style=flat-square)](LICENSE)
-[![Version](https://img.shields.io/badge/version-v2.1.0-green.svg?style=flat-square)](https://github.com/sansan0/TrendRadar)
+[![Version](https://img.shields.io/badge/version-v2.1.1-green.svg?style=flat-square)](https://github.com/sansan0/TrendRadar)
 
 [![企业微信通知](https://img.shields.io/badge/企业微信-通知支持-00D4AA?style=flat-square)](https://work.weixin.qq.com/)
 [![Telegram通知](https://img.shields.io/badge/Telegram-通知支持-00D4AA?style=flat-square)](https://telegram.org/)
@@ -25,7 +25,7 @@
 > 遇到问题提 issues，或【硅基茶水间】公众号留言
 
 <details>
-<summary>👉 点击查看致谢名单 (当前 <strong>🔥14🔥</strong> 位)</summary>
+<summary>👉 点击查看<strong>致谢名单</strong> (当前 <strong>🔥15🔥</strong> 位)</summary>
 
 ### 数据支持
 
@@ -45,6 +45,7 @@
 
 |           点赞人            |  金额  |  日期  |             备注             |
 | :-------------------------: | :----: | :----: | :-----------------------: |
+|           *X            |  1.11  | 2025.9.3  |           |
 |           *飙            |  20  | 2025.8.31  |  来自老童谢谢         |
 |           *下            |  1  | 2025.8.30  |           |
 |           2*D            |  88  | 2025.8.13 下午 |           |
@@ -57,20 +58,12 @@
 |           *梦            |  0.1  | 2025.7.30 |            |
 |           **龙            |  10  | 2025.7.29 |      支持一下      |
 
+
+</details>
+
+
 <details>
-<summary><strong>👉 "手机推送通知系列" 挖坑(暂时鸽)</strong></summary>
-<br>
-
-截图中只支持一个渠道，大家有什么好的建议和想法可以公众号留言，完善好后开源
-这个暂时没有人来和我讨论，我先鸽为敬嘿嘿
-
-<img src="_image/next.jpg" width="300" title="github"/>
-
-</details>
-
-
-</details>
-
+<summary>👉 <strong>核心功能</strong></summary>
 
 ## ✨ 核心功能
 
@@ -132,7 +125,9 @@ GitHub 一键 Fork 即可使用，无需编程基础。
 
 **典型场景：** 股市投资监控、品牌舆情追踪、行业动态关注、生活资讯获取
 
-| Github Pages效果 | 飞书推送效果 |
+</details>
+
+| Github Pages 网页效果(手机端也适配) | 飞书推送效果 |
 |:---:|:---:|
 | ![Github Pages效果](_image/github-pages.png) | ![飞书推送效果](_image/feishu.jpg) |
 
@@ -177,7 +172,6 @@ GitHub 一键 Fork 即可使用，无需编程基础。
 - **小版本更新**：一般情况，直接在 GitHub 网页编辑器中，用本项目的 `main.py` 代码替换你 fork 仓库中的对应文件 
 - **大版本升级**：从 v1.x 升级到 v2.0 建议删除现有 fork 后重新 fork，这样更省力且避免配置冲突
 
-### 2025/08/30 - v2.1.0
 
 > 感谢各位朋友的支持与厚爱，特别感谢：
 > 
@@ -189,6 +183,17 @@ GitHub 一键 Fork 即可使用，无需编程基础。
 > 
 > 下一次**新功能**，大概会是 ai 分析功能(大概(●'◡'●)
 
+### 2025/09/04 - v2.1.1
+
+- 修复docker在某些架构中无法正常运行的问题
+- 正式发布官方 Docker 镜像 wantcat/trendradar，支持多架构
+- 优化 Docker 部署流程，无需本地构建即可快速使用
+
+<details>
+<summary><strong>👉 历史更新</strong></summary>
+
+### 2025/08/30 - v2.1.0
+
 **核心改进**：
 - **推送逻辑优化**：从"每次执行都推送"改为"时间窗口内可控推送"
 - **时间窗口控制**：可设定推送时间范围，避免非工作时间打扰
@@ -197,9 +202,6 @@ GitHub 一键 Fork 即可使用，无需编程基础。
 **更新提示**：
 - 本功能默认关闭，需手动在 config.yaml 中开启静默推送模式
 - 升级需同时更新 main.py 和 config.yaml 两个文件
-
-<details>
-<summary><strong>👉 历史更新</strong></summary>
 
 ### 2025/08/27 - v2.0.4
 
@@ -654,46 +656,164 @@ platforms:
 
 ### 🐳 Docker 部署
 
-1. **克隆项目并进入目录**:
+#### 方式一：快速体验（一行命令）
+
+```bash
+# 直接运行，使用默认配置（仅体验功能，无推送通知）
+docker run -d --name trend-radar \
+  -v ./config:/app/config:ro \
+  -v ./output:/app/output \
+  wantcat/trendradar:latest
+
+# 或者配置环境变量启用推送通知
+docker run -d --name trend-radar \
+  -v ./config:/app/config:ro \
+  -v ./output:/app/output \
+  -e FEISHU_WEBHOOK_URL="你的飞书webhook" \
+  -e DINGTALK_WEBHOOK_URL="你的钉钉webhook" \
+  -e WEWORK_WEBHOOK_URL="你的企业微信webhook" \
+  -e TELEGRAM_BOT_TOKEN="你的telegram_bot_token" \
+  -e TELEGRAM_CHAT_ID="你的telegram_chat_id" \
+  -e CRON_SCHEDULE="*/30 * * * *" \
+  wantcat/trendradar:latest
+```
+
+**注意**：快速体验模式需要先准备配置文件：
+```bash
+# 创建配置目录并下载配置文件
+mkdir -p config output
+wget https://raw.githubusercontent.com/sansan0/TrendRadar/master/config/config.yaml -P config/
+wget https://raw.githubusercontent.com/sansan0/TrendRadar/master/config/frequency_words.txt -P config/
+```
+
+#### 方式二：使用 docker-compose（推荐）
+
+1. **创建项目目录和配置**:
    ```bash
-   git clone https://github.com/sansan0/TrendRadar.git
-   cd TrendRadar
+   # 创建目录结构
+   mkdir -p trendradar/{config,output}
+   cd trendradar
+   
+   # 下载配置文件模板
+   wget https://raw.githubusercontent.com/sansan0/TrendRadar/master/config/config.yaml -P config/
+   wget https://raw.githubusercontent.com/sansan0/TrendRadar/master/config/frequency_words.txt -P config/
+   
+   # 下载 docker-compose 配置
+   wget https://raw.githubusercontent.com/sansan0/TrendRadar/master/docker/.env
+   wget https://raw.githubusercontent.com/sansan0/TrendRadar/master/docker/docker-compose.yml
    ```
 
-2. **配置文件**:
-   - 修改 `config/config.yaml` 和 `config/frequency_words.txt`
-   - **推送链接填写**，**设置推送定时**可通过 .env 进行配置
+2. **配置文件说明**:
+   - `config/config.yaml` - 应用主配置（报告模式、推送设置等）
+   - `config/frequency_words.txt` - 关键词配置（设置你关心的热点词汇）
+   - `.env` - 环境变量配置（webhook URLs 和定时任务）
 
 3. **启动服务**:
    ```bash
-   cd docker
+   # 拉取最新镜像并启动
+   docker-compose pull
    docker-compose up -d
    ```
 
-4. **管理服务**:
+4. **查看运行状态**:
    ```bash
-   # 查看运行状态
-   docker exec -it trend-radar python manage.py status
+   # 查看日志
+   docker logs -f trend-radar
    
-   # 手动执行一次爬虫
-   docker exec -it trend-radar python manage.py run
-   
-   # 查看实时日志
-   docker exec -it trend-radar python manage.py logs
-   
-   # 显示当前配置
-   docker exec -it trend-radar python manage.py config
-   
-   # 显示输出文件
-   docker exec -it trend-radar python manage.py files
-   
-   # 重启定时服务
-   docker exec -it trend-radar python manage.py restart
-   
-   # 显示帮助信息
-   docker exec -it trend-radar python manage.py help
+   # 查看容器状态
+   docker ps | grep trend-radar
    ```
+
+#### 方式三：本地构建（开发者选项）
+
+如果需要自定义修改代码或构建自己的镜像：
+
+```bash
+# 克隆项目
+git clone https://github.com/sansan0/TrendRadar.git
+cd TrendRadar
+
+# 修改配置文件
+vim config/config.yaml
+vim config/frequency_words.txt
+
+# 使用构建版本的 docker-compose
+cd docker
+cp docker-compose-build.yml docker-compose.yml
+
+# 构建并启动
+docker-compose build
+docker-compose up -d
+```
+
+#### 镜像更新
+
+```bash
+# 方式一：手动更新
+docker pull wantcat/trendradar:latest
+docker-compose down
+docker-compose up -d
+
+# 方式二：使用 docker-compose 更新
+docker-compose pull
+docker-compose up -d
+```
+
+#### 服务管理命令
+
+```bash
+# 查看运行状态
+docker exec -it trend-radar python manage.py status
+
+# 手动执行一次爬虫
+docker exec -it trend-radar python manage.py run
+
+# 查看实时日志
+docker exec -it trend-radar python manage.py logs
+
+# 显示当前配置
+docker exec -it trend-radar python manage.py config
+
+# 显示输出文件
+docker exec -it trend-radar python manage.py files
+
+# 查看帮助信息
+docker exec -it trend-radar python manage.py help
+
+# 重启容器
+docker restart trend-radar
+
+# 停止容器
+docker stop trend-radar
+
+# 删除容器（保留数据）
+docker rm trend-radar
+```
+
+#### 数据持久化
+
+生成的报告和数据默认保存在 `./output` 目录下，即使容器重启或删除，数据也会保留。
+
+#### 故障排查
+
+```bash
+# 检查容器状态
+docker inspect trend-radar
+
+# 查看容器日志
+docker logs --tail 100 trend-radar
+
+# 进入容器调试
+docker exec -it trend-radar /bin/bash
+
+# 验证配置文件
+docker exec -it trend-radar ls -la /app/config/
+```
+
 </details>
+
+
+
 
 ## ☕ 学习交流与1元点赞
 
